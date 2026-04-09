@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.0] - 2026-04-09
 
+### Added
+- `--last` (`-l`) flag: instantly undo the last operation without interactive menu
+- `--dry-run` (`-n`) flag: preview what would happen without executing
+- Can combine both: `git-undo --last --dry-run`
+
 ### Improved
 - Complete UI overhaul with beautiful ASCII art banner
 - Operation icons (📝 commit, 🔗 merge, 🔄 reset, etc.)
@@ -14,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shows restore target and effect description before confirming
 - Better error messages for non-git repos and empty repos
 - "Undo the undo" tip after successful operation
+- Refactored undo logic into `executeUndo()` helper
 
 ### Fixed
 - Fixed crash when undoing with no parent commit (HEAD~1 error)
@@ -47,4 +53,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ~150 lines of code
 - Requires Git 2.0+ and Node.js 14+
 
-[1.0.0]: https://github.com/yourusername/git-undo/releases/tag/v1.0.0
+[1.1.0]: https://github.com/Feelzaa/git-undo/releases/tag/v1.1.0
+[1.0.0]: https://github.com/Feelzaa/git-undo/releases/tag/v1.0.0
