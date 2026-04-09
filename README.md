@@ -91,9 +91,11 @@ That's it. Run it inside any git repository.
 | 🎯 **Interactive** | Beautiful menu to browse & select operations |
 | 🧠 **Smart Detection** | Auto-detects commits, merges, rebases, resets, etc. |
 | 🛡️ **Safe by Default** | Confirmation prompt + shows exactly what will happen |
+| ⚡ **Quick Undo** | `git-undo --last` to instantly undo the last operation |
+| 🔍 **Dry Run** | `git-undo --dry-run` to preview without executing |
 | ⏪ **Undo the Undo** | Made a mistake undoing? Run it again! |
 | 📝 **Detailed Info** | Shows operation type, hash, timestamp, and restore target |
-| ⚡ **Zero Config** | No setup needed — just run the command |
+| 🚀 **Zero Config** | No setup needed — just run the command |
 
 <br>
 
@@ -139,6 +141,17 @@ $ git reset --hard HEAD~5              # 😰 Lost 5 commits!
 $ git-undo                             # 🔄 Select the reset
 
 ✓ Restored! Back to previous state
+```
+
+### Quick undo (no menu)
+```bash
+$ git-undo --last                      # ⚡ Undo last operation instantly
+```
+
+### Preview before undoing
+```bash
+$ git-undo --dry-run                   # 🔍 See what would happen
+$ git-undo --last --dry-run            # 🔍 Preview last operation undo
 ```
 
 <br>
