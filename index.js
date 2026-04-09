@@ -41,13 +41,20 @@ function parseOperationType(subject) {
   return 'other';
 }
 
-async function undoOperation(entry) {
+async function undoOperation(entry, prevEntry) {
   const operationType = parseOperationType(entry.subject);
   
   console.log(chalk.blue(`\n📝 Operation: ${entry.subject}`));
   console.log(chalk.dim(`   Type: ${operationType}`));
   console.log(chalk.dim(`   Hash: ${entry.fullHash}`));
   
+  if (!prevEntry) {
+    console.log(chalk.red('✗ Cannot undo: this is the first operation in the repository'));
+    return;
+  }
+
+  console.log(chalk.dim(`   Will restore to: ${prevEntry.hash} (${prevEntry.subject})`));
+
   const { confirm } = await inquirer.prompt([{
     type: 'confirm',
     name: 'confirm',
@@ -61,33 +68,29 @@ async function undoOperation(entry) {
   }
 
   try {
+    const targetHash = prevEntry.fullHash;
+
     switch (operationType) {
       case 'commit':
       case 'amend':
-        await execa('git', ['reset', 'HEAD~1'], { stdio: 'inherit' });
-        console.log(chalk.green('✓ Commit undone successfully'));
-        break;
-      
-      case 'reset':
-      case 'checkout':
-        await execa('git', ['reset', '--hard', entry.fullHash], { stdio: 'inherit' });
-        console.log(chalk.green('✓ Restored to previous state'));
+        // Use previous reflog state instead of HEAD~1 for safety
+        await execa('git', ['reset', targetHash], { stdio: 'inherit' });
+        console.log(chalk.green('✓ Commit undone (changes kept in working tree)'));
         break;
       
       case 'merge':
-        await execa('git', ['reset', '--merge', 'ORIG_HEAD'], { stdio: 'inherit' });
+        await execa('git', ['reset', '--hard', targetHash], { stdio: 'inherit' });
         console.log(chalk.green('✓ Merge undone'));
         break;
       
       case 'rebase':
-        console.log(chalk.yellow('⚠ Rebase operations require manual intervention'));
-        await execa('git', ['reset', '--hard', entry.fullHash], { stdio: 'inherit' });
+        await execa('git', ['reset', '--hard', targetHash], { stdio: 'inherit' });
         console.log(chalk.green('✓ Restored to before rebase'));
         break;
-      
+
       default:
-        await execa('git', ['reset', '--hard', entry.fullHash], { stdio: 'inherit' });
-        console.log(chalk.green('✓ Reset to selected state'));
+        await execa('git', ['reset', '--hard', targetHash], { stdio: 'inherit' });
+        console.log(chalk.green('✓ Restored to previous state'));
     }
   } catch (error) {
     console.error(chalk.red(`✗ Failed to undo: ${error.message}`));
@@ -105,18 +108,21 @@ async function main() {
     return;
   }
 
-  const { selectedEntry } = await inquirer.prompt([{
+  const { selectedIndex } = await inquirer.prompt([{
     type: 'list',
-    name: 'selectedEntry',
+    name: 'selectedIndex',
     message: 'Select an operation to undo:',
     choices: entries.map((entry, idx) => ({
       name: entry.display,
-      value: entry
+      value: idx
     })),
     pageSize: 15
   }]);
 
-  await undoOperation(selectedEntry);
+  const selectedEntry = entries[selectedIndex];
+  const prevEntry = entries[selectedIndex + 1] || null;
+
+  await undoOperation(selectedEntry, prevEntry);
 }
 
 program
