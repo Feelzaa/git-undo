@@ -14,12 +14,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/git-undo.git"
+    "url": "https://github.com/feelzaa/git-undo.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/git-undo/issues"
+    "url": "https://github.com/feelzaa/git-undo/issues"
   },
-  "homepage": "https://github.com/yourusername/git-undo#readme",
+  "homepage": "https://github.com/feelzaa/git-undo#readme",
   "engines": {
     "node": ">=14.0.0"
   },
