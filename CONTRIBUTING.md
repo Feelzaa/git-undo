@@ -6,7 +6,7 @@ Thanks for your interest in contributing! 🎉
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/git-undo.git
+git clone https://github.com/Feelzaa/git-undo.git
 cd git-undo
 
 # Install dependencies
@@ -23,7 +23,7 @@ git-undo
 ## Ways to Contribute
 
 ### 🐛 Bug Reports
-Found a bug? [Open an issue](https://github.com/yourusername/git-undo/issues) with:
+Found a bug? [Open an issue](https://github.com/Feelzaa/git-undo/issues) with:
 - What you expected to happen
 - What actually happened
 - Steps to reproduce
@@ -31,7 +31,7 @@ Found a bug? [Open an issue](https://github.com/yourusername/git-undo/issues) wi
 - Your Node.js version (`node --version`)
 
 ### 💡 Feature Requests
-Have an idea? [Open an issue](https://github.com/yourusername/git-undo/issues) describing:
+Have an idea? [Open an issue](https://github.com/Feelzaa/git-undo/issues) describing:
 - The problem you're trying to solve
 - Your proposed solution
 - Any alternatives you've considered

@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-04-09
+
+### Improved
+- Complete UI overhaul with beautiful ASCII art banner
+- Operation icons (📝 commit, 🔗 merge, 🔄 reset, etc.)
+- Detailed operation info panel with box-drawing characters
+- Shows restore target and effect description before confirming
+- Better error messages for non-git repos and empty repos
+- "Undo the undo" tip after successful operation
+
+### Fixed
+- Fixed crash when undoing with no parent commit (HEAD~1 error)
+- Now uses reflog-based targeting instead of HEAD~1
+- Fixed ESM compatibility issues (chalk, inquirer, execa)
+
 ## [1.0.0] - 2026-04-09
 
 ### Added
