@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const { program } = require('commander');
-const { execa } = require('execa');
+const execa = require('execa');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 
